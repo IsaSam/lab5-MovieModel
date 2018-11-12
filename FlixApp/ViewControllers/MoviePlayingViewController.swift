@@ -47,7 +47,9 @@ class MoviePlayingViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func fetchMovies(){
-        MovieApiManager().nowPlayingMovies { (movies: [Movie]?, error: Error?) in
+        //MovieApiManager().nowPlayingMovies { (movies: [Movie]?, error: Error?) in
+        //MovieApiManager().popularMovies { (movies: [Movie]?, error: Error?) in
+        MovieApiManager().popularMovies{(movies: [Movie]?, error: Error?) in
             
             self.activityIndicator.startAnimating()
             if let movies = movies {
@@ -57,52 +59,7 @@ class MoviePlayingViewController: UIViewController, UITableViewDelegate, UITable
                 self.refreshControl.endRefreshing()
             }
         }
-        /*
-        activityIndicator.startAnimating()
-        let url = URL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed")!
-        let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
-        let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
-        let task = session.dataTask(with: request) {(data, response, error) in
-            //-- This will run when the network request returns
-            if let error = error{
-                let errorAlertController = UIAlertController(title: "Cannot Get Movies", message: "The Internet connections appears to be offline", preferredStyle: .alert)
-                let cancelAction = UIAlertAction(title: "Retry", style: .cancel)
-                errorAlertController.addAction(cancelAction)
-                self.present(errorAlertController, animated: true)
-                print(error.localizedDescription)
-            }
-            
-            let data = data
-            //else if let data = data,
-                /*
-                let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]{
-                self.movies = dataDictionary["results"] as! [[String: Any]]
-                self.tableView.reloadData()
-            } */
-                //------------
-            let dataDictionary = try! JSONSerialization.jsonObject(with: data!, options: []) as! [String: Any]
-                let movieDictionaries = dataDictionary["results"] as! [[String: Any]]
-            
-                self.movies = []
-                for dictionary in movieDictionaries {
-                    let movie = Movie(dictionary: dictionary)
-                    self.movies.append(movie)
-                }
-            
-                //------------
-            self.refreshControl.endRefreshing()
-        }
-        task.resume()
-        activityIndicator.stopAnimating()
-        */
     }
-    /*
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        self.filteredMovies = searchText.isEmpty ? self.movies : self.movies.filter({(movie) -> Bool in
-            return (movie["title"] as! String).range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
-        })
-        self.tableView.reloadData()
-    }*/
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if self.searchBar.text!.isEmpty{
@@ -118,25 +75,6 @@ class MoviePlayingViewController: UIViewController, UITableViewDelegate, UITable
         
         cell.movies = movies[indexPath.row]
         
-        /*
-        let movie = self.searchBar.text!.isEmpty ? movies[indexPath.row] : filteredMovies![indexPath.row]
-        
-        
-        let title = movie["title"] as! String
-        let overview = movie["overview"] as! String
-        cell.titleLabel.text = title
-        cell.overviewTextView.text = overview
-        
-        if let posterPath = movie["poster_path"] as? String{
-            let posterBaseUrl = "https://image.tmdb.org/t/p/w500"
-            let posterUrl = URL(string:  posterBaseUrl + posterPath)
-            cell.MoviesImageView.af_setImage(withURL: posterUrl!)
-        }
-        else{
-            cell.MoviesImageView.image = nil
-        }
-        
-        */
         return cell
     }
     
