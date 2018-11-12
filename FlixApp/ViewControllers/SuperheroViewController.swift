@@ -77,7 +77,7 @@ class SuperheroViewController: UIViewController, UICollectionViewDataSource, UIC
         let indexPath = collectionView.indexPath(for: cell)
         let movie = movies[(indexPath?.row)!]
         let detailViewController = segue.destination as! DetailViewController
-        detailViewController.movie = movie
+        //detailViewController.movie = movie
     }
 
     override func didReceiveMemoryWarning() {

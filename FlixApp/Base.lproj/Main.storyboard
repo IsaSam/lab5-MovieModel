@@ -162,21 +162,6 @@
             </objects>
             <point key="canvasLocation" x="1514" y="148"/>
         </scene>
-        <!--Popular Movies View Controller-->
-        <scene sceneID="dr6-2D-YiC">
-            <objects>
-                <viewController id="jc0-9G-Gnk" customClass="PopularMoviesViewController" customModule="MovieModel" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="qd8-66-moy">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="L7O-AM-ZBX"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gm0-Zg-4qp" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2046" y="-563"/>
-        </scene>
         <!--Web View Trailler View Controller-->
         <scene sceneID="Cm0-yM-ZTf">
             <objects>
@@ -375,6 +360,7 @@
                                             <outlet property="MoviesImageView" destination="gsA-dF-dXQ" id="fMf-bv-eo7"/>
                                             <outlet property="overviewTextView" destination="nrh-7Y-zu5" id="uCU-7b-zga"/>
                                             <outlet property="titleLabel" destination="3iG-Cs-6Yc" id="yuK-Fi-f0X"/>
+                                            <segue destination="Y2Y-UA-c4w" kind="push" id="erD-iI-AZc"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -425,6 +411,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="eng-a3-O0M"/>
-        <segue reference="rlS-bd-Ymw"/>
+        <segue reference="erD-iI-AZc"/>
     </inferredMetricsTieBreakers>
 </document>

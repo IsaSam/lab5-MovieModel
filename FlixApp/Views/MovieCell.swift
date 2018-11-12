@@ -19,11 +19,21 @@ class MovieCell: UITableViewCell {
         didSet {
             titleLabel.text = movies.title
             overviewTextView.text = movies.overview
-            //if let posterPath = movie["poster_path"] as? String{
-            
                 let posterBaseUrl = "https://image.tmdb.org/t/p/w500"
                 let posterPathUrl = URL(string:  posterBaseUrl + movies.posterUrl!)
                 MoviesImageView.af_setImage(withURL: posterPathUrl!)
+
+            /*if let posterPath = movie["poster_path"] as? String{
+                let posterBaseUrl = "https://image.tmdb.org/t/p/w500"
+                let posterUrl = URL(string:  posterBaseUrl + posterPath)
+                cell.MoviesImageView.af_setImage(withURL: posterUrl!)
+            }
+            else{
+                cell.MoviesImageView.image = nil
+            }
+            */
+            
+            
             
             }
             // // let posterpathURL = URL(string: baseUrlString + movies.posterUrl!)!

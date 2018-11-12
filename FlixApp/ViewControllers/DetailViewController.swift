@@ -24,12 +24,19 @@ class DetailViewController: UIViewController, UITableViewDelegate {
     @IBOutlet weak var playMoviesImageButton: UIButton!
     @IBOutlet weak var playMoviesBackButton: UIButton!
     
-    var movie: [String: Any]?
+    //var movie: [String: Any]?
+    var movies: [Movie] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let movie = movie{
+        var movies: Movie!{
+            didSet{
+                titleLabel.text = movies.title
+                overviewLabel.text = movies.overview
+            }
+        }
+        /*if let movie = movie{
             titleLabel.text = movie[MovieKeys.title] as? String
             releaseDateLabel.text = movie["release_date"] as? String
             overviewLabel.text = movie ["overview"] as? String
@@ -40,15 +47,15 @@ class DetailViewController: UIViewController, UITableViewDelegate {
             backDropImageView.af_setImage(withURL: backdropURL)
             let posterPathURL = URL(string: posterBaseUrl + posterPathString)!
             posterImageView.af_setImage(withURL: posterPathURL)
-        }
+        }*/
 
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let vc = segue.destination as! webViewTraillerViewController
+        /*let vc = segue.destination as! webViewTraillerViewController
         if let movie = movie{
             let movieID = String(describing: movie[MovieKeys.movieID]!)
             vc.movieId = movieID
-        }
+        }*/
     }
 
     override func didReceiveMemoryWarning() {
