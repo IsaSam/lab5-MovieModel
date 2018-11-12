@@ -62,14 +62,15 @@ class MoviePlayingViewController: UIViewController, UITableViewDelegate, UITable
                 print(error.localizedDescription)
             }
             
-            else if let data = data,
+            let data = data
+            //else if let data = data,
                 /*
                 let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]{
                 self.movies = dataDictionary["results"] as! [[String: Any]]
                 self.tableView.reloadData()
             } */
                 //------------
-                let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]{
+            let dataDictionary = try! JSONSerialization.jsonObject(with: data!, options: []) as! [String: Any]
                 let movieDictionaries = dataDictionary["results"] as! [[String: Any]]
             
                 self.movies = []
@@ -77,20 +78,20 @@ class MoviePlayingViewController: UIViewController, UITableViewDelegate, UITable
                     let movie = Movie(dictionary: dictionary)
                     self.movies.append(movie)
                 }
-            }
+            
                 //------------
             self.refreshControl.endRefreshing()
         }
         task.resume()
         activityIndicator.stopAnimating()
     }
-    
+    /*
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         self.filteredMovies = searchText.isEmpty ? self.movies : self.movies.filter({(movie) -> Bool in
             return (movie["title"] as! String).range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
         })
         self.tableView.reloadData()
-    }
+    }*/
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if self.searchBar.text!.isEmpty{
@@ -137,7 +138,7 @@ class MoviePlayingViewController: UIViewController, UITableViewDelegate, UITable
         let indexPath = tableView.indexPath(for: cell)
         let movie = movies[(indexPath?.row)!]
         let detailViewController = segue.destination as! DetailViewController
-        detailViewController.movie = movie
+        //detailViewController.movie = movie
     }
     
     override func didReceiveMemoryWarning() {
