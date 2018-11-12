@@ -18,7 +18,8 @@ class MoviePlayingViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var searchBar: UISearchBar!
     
     var filteredMovies: [[String: Any]]?
-    var movies: [[String: Any]] = []
+    //var movies: [[String: Any]] = []
+    var movies: [Movie] = []
     var reasultsController = UITableViewController()
     var refreshControl: UIRefreshControl!
     
@@ -47,7 +48,7 @@ class MoviePlayingViewController: UIViewController, UITableViewDelegate, UITable
     
     func fetchMovies(){
         activityIndicator.startAnimating()
-        
+    
         let url = URL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed")!
         let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
         let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
@@ -59,11 +60,25 @@ class MoviePlayingViewController: UIViewController, UITableViewDelegate, UITable
                 errorAlertController.addAction(cancelAction)
                 self.present(errorAlertController, animated: true)
                 print(error.localizedDescription)
-            } else if let data = data,
+            }
+            
+            else if let data = data,
+                /*
                 let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]{
                 self.movies = dataDictionary["results"] as! [[String: Any]]
                 self.tableView.reloadData()
+            } */
+                //------------
+                let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]{
+                let movieDictionaries = dataDictionary["results"] as! [[String: Any]]
+            
+                self.movies = []
+                for dictionary in movieDictionaries {
+                    let movie = Movie(dictionary: dictionary)
+                    self.movies.append(movie)
+                }
             }
+                //------------
             self.refreshControl.endRefreshing()
         }
         task.resume()
@@ -84,9 +99,17 @@ class MoviePlayingViewController: UIViewController, UITableViewDelegate, UITable
             return filteredMovies?.count ?? 0
         }
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath) as! MovieCell
+        
+        cell.movies = movies[indexPath.row]
+        
+        /*
         let movie = self.searchBar.text!.isEmpty ? movies[indexPath.row] : filteredMovies![indexPath.row]
+        
+        
         let title = movie["title"] as! String
         let overview = movie["overview"] as! String
         cell.titleLabel.text = title
@@ -100,7 +123,8 @@ class MoviePlayingViewController: UIViewController, UITableViewDelegate, UITable
         else{
             cell.MoviesImageView.image = nil
         }
-
+        
+        */
         return cell
     }
     
