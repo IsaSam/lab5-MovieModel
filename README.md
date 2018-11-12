@@ -16,7 +16,7 @@ The following **required** user stories are complete:
 The following **additional** user stories are implemented:
 
 - [X] List anything else that you can get done to improve the app functionality! (+1-3pts)
-      [X] Fetching popular movies
+-      [X] Fetching popular movies
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
@@ -27,7 +27,7 @@ Please list two areas of the assignment you'd like to **discuss further with you
 
 Here's a walkthrough of implemented user stories:
 
-<img src='MovieModel.gif' title='Video Walkthrough MovieModel' alt='Video Walkthrough Lab 5' />
+<img src='MovieModel-lab5.gif' title='Video Walkthrough MovieModel' alt='Video Walkthrough Lab 5' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
